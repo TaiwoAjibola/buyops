@@ -23,7 +23,7 @@ function BuildingBlock({ position, args, color = "white", edgeColor = "black" }:
         emissive={color === "white" ? "#ffffff" : color}
         emissiveIntensity={color === "white" ? 0.2 : 0}
       />
-      <Edges threshold={15} color={edgeColor} lineWidth={2} />
+      <Edges threshold={15} color={edgeColor} />
     </mesh>
   )
 }

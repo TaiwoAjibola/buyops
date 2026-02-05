@@ -1,0 +1,168 @@
+BuyOps Landing Page - Component Architecture
+==============================================
+
+┌─────────────────────────────────────────────────────────────┐
+│                     App Layout (Root)                       │
+│  • Global CSS (Deep Indigo background)                     │
+│  • Inter Font                                               │
+│  • SmoothScrollProvider (Lenis wrapper)                    │
+└─────────────────────────────────────────────────────────────┘
+                            ↓
+┌─────────────────────────────────────────────────────────────┐
+│                    Main Landing Page                        │
+└─────────────────────────────────────────────────────────────┘
+                            ↓
+        ┌───────────────────┴───────────────────┐
+        │                                       │
+┌───────▼──────────┐                   ┌────────▼────────┐
+│  Section 1:      │                   │  Reusable       │
+│  HERO            │                   │  Components     │
+├──────────────────┤                   ├─────────────────┤
+│ • H1 Staggered   │                   │ • BentoCard     │
+│   Text           │◄──────────────────┤ • AppPreview    │
+│ • Certificate    │                   │ • ScrollSection │
+│   (3D Tilt)      │                   └─────────────────┘
+└──────────────────┘
+        │
+        │
+┌───────▼──────────┐
+│  Section 2:      │
+│  TRINITY         │
+├──────────────────┤
+│ ┌──────────────┐ │
+│ │ BuyOps Admin │ │ ← Slide from right (0.2s delay)
+│ │ • Revenue    │ │
+│ │ • Status     │ │
+│ └──────────────┘ │
+│                  │
+│ ┌──────────────┐ │
+│ │ BuyOps Sales │ │ ← Slide from left (0.4s delay)
+│ │ • 4 Tabs     │ │
+│ │ • Pipeline   │ │
+│ └──────────────┘ │
+│                  │
+│ ┌──────────────┐ │
+│ │ Investor App │ │ ← Slide from right (0.6s delay)
+│ │ • Mobile UI  │ │
+│ │ • Fractions  │ │
+│ └──────────────┘ │
+└──────────────────┘
+        │
+        │
+┌───────▼──────────────────────────────────────────┐
+│  Section 3: FRACTIONAL GALLERY                   │
+├──────────────────────────────────────────────────┤
+│                                                  │
+│  ┌────┐  ┌────┐  ┌────┐  ┌────┐  ┌────┐       │
+│  │ P1 │→ │ P2 │→ │ P3 │→ │ P4 │→ │ P1 │→ ...  │
+│  └────┘  └────┘  └────┘  └────┘  └────┘       │
+│                                                  │
+│  Infinite Marquee Animation (60s loop)          │
+│  • Hover to explode and reveal metadata         │
+│  • Shimmer effect on ₦ prices                   │
+└──────────────────────────────────────────────────┘
+        │
+        │
+┌───────▼──────────────────────────────────────────┐
+│  Section 4: DIGITAL TRAIL                        │
+├──────────────────────────────────────────────────┤
+│                                                  │
+│  ┌───────────┐          ┌──────────────────┐   │
+│  │ Sticky    │          │  Main Content    │   │
+│  │ Sidebar   │          │                  │   │
+│  │           │          │  Step 1 Details  │   │
+│  │ ○ Step 1  │◄─────────┤  400px height    │   │
+│  │ ● Step 2  │  Scroll  │                  │   │
+│  │ ○ Step 3  │  Sync    │  Step 2 Details  │   │
+│  │ ○ Step 4  │          │  400px height    │   │
+│  │           │          │                  │   │
+│  └───────────┘          │  Step 3 Details  │   │
+│                         │  400px height    │   │
+│                         │                  │   │
+│                         │  Step 4 Details  │   │
+│                         │  + Reg Code      │   │
+│                         └──────────────────┘   │
+└──────────────────────────────────────────────────┘
+        │
+        │
+┌───────▼──────────────────────────────────────────┐
+│  Section 5: CTA & FOOTER                         │
+├──────────────────────────────────────────────────┤
+│                                                  │
+│  ┌────────────────────────────────────────────┐ │
+│  │      Main CTA Bento                        │ │
+│  │  • "Ready to Transform Real Estate?"       │ │
+│  │  • Glowing "Get Started" button            │ │
+│  │  • "Schedule Demo" outline button          │ │
+│  └────────────────────────────────────────────┘ │
+│                                                  │
+│  ┌────┐  ┌────┐  ┌────┐  ┌────┐               │
+│  │Stat│  │Stat│  │Stat│  │Stat│  Stats Grid   │
+│  └────┘  └────┘  └────┘  └────┘               │
+│                                                  │
+│  ┌──────┐ ┌──────┐ ┌──────┐ ┌──────┐          │
+│  │Links │ │Links │ │Links │ │Links │  Footer  │
+│  └──────┘ └──────┘ └──────┘ └──────┘          │
+│                                                  │
+│  ┌────────────────────────────────────────────┐ │
+│  │  Logo | Copyright | Social Links           │ │
+│  └────────────────────────────────────────────┘ │
+└──────────────────────────────────────────────────┘
+
+
+Animation Flow Timeline:
+========================
+
+0.0s  → Page loads with deep indigo background
+0.1s  → Hero word 1 appears
+0.2s  → Hero word 2 appears
+...   → Continue staggered text
+1.5s  → Hero subtitle fades in
+2.0s  → Certificate card scales in
+2.5s  → Mouse-tracking 3D tilt active
+3.0s  → Scroll indicator appears
+
+[User scrolls down]
+
+        → Trinity section slides in from right
+        → Property cards enter marquee
+        → Digital Trail sidebar activates
+        → Footer stats count up
+
+
+Key Animation Techniques:
+=========================
+
+1. Framer Motion Variants
+   - initial, animate, whileInView
+   - Stagger children with delay
+
+2. Scroll-Linked Animations
+   - useScroll hook
+   - useTransform for parallax
+   - Scroll progress bars
+
+3. Mouse Tracking
+   - useMotionValue for mouse position
+   - 3D transforms (rotateX, rotateY)
+
+4. Continuous Animations
+   - Infinite marquee (translateX)
+   - Pulse effects
+   - Shimmer overlays
+
+5. Hover States
+   - Scale transforms
+   - Color transitions
+   - Reveal hidden content
+
+
+Performance Optimization:
+=========================
+
+✓ Viewport detection (once: true)
+✓ Hardware acceleration (transform, opacity)
+✓ Lazy component loading
+✓ Optimized re-renders
+✓ Efficient scroll listeners (Lenis)
+✓ CSS containment for isolation

@@ -1,0 +1,202 @@
+'use client'
+
+import { motion, AnimatePresence } from 'framer-motion'
+import { useState } from 'react'
+
+type Persona = 'owners' | 'agents' | 'investors'
+
+export default function PersonaSwitcher() {
+  const [activeTab, setActiveTab] = useState<Persona>('owners')
+
+  const personas = {
+    owners: {
+      color: '#4338CA',
+      bgColor: 'bg-indigo-600',
+      headline: 'Monetize your Land & Property.',
+      description: 'Transform your real estate assets into income-generating fractions. BuyOps Admin gives you total control over asset lifecycle, investor management, and revenue distribution.',
+      features: [
+        'Multi-step Asset Wizard (Land, Off-plan, Under Construction)',
+        'Automated Fraction Distribution System',
+        'Real-time Revenue Analytics',
+        'Investor Relations Dashboard',
+        'Legal Documentation Management'
+      ],
+      stats: [
+        { label: 'Total Assets Listed', value: '156' },
+        { label: 'Average ROI Delivered', value: '18%' },
+        { label: 'Revenue Generated', value: '₦847M' }
+      ],
+      cta: 'List Your Property',
+      theme: 'indigo'
+    },
+    agents: {
+      color: '#10B981',
+      bgColor: 'bg-green-600',
+      headline: 'Sell Faster, Earn Sooner.',
+      description: 'Empower your sales pipeline with zero-friction lead management. Close deals without cash handling and earn commissions instantly through our velocity layer.',
+      features: [
+        '4-Tab Lead Pipeline (Personal, Assigned, Freelancer, Archive)',
+        'Instant Commission Calculator (Lead Finder vs. Deal Closer)',
+        'One-Click Payment Link Generation',
+        'Real-time Lead Status Tracking',
+        'Automated Follow-up System'
+      ],
+      stats: [
+        { label: 'Active Leads', value: '127' },
+        { label: 'Deals Closed This Month', value: '43' },
+        { label: 'Commission Earned', value: '₦12.4M' }
+      ],
+      cta: 'Start Selling',
+      theme: 'green'
+    },
+    investors: {
+      color: '#2563EB',
+      bgColor: 'bg-blue-600',
+      headline: 'Buy the Future, One Piece at a Time.',
+      description: 'Access premium real estate fractions with complete transparency. Track your portfolio in real-time and access 7-section asset intelligence from anywhere.',
+      features: [
+        'Fractional Ownership Model (Not Percentages)',
+        '7-Section Deep-Dive Asset Intelligence',
+        'Real-time Portfolio Valuation',
+        'Automated Digital Certificates (PR-HRL-####)',
+        'Dividend Tracking & Payouts'
+      ],
+      stats: [
+        { label: 'Properties Available', value: '500+' },
+        { label: 'Average Entry Point', value: '₦850K' },
+        { label: 'Total Investors', value: '10,000+' }
+      ],
+      cta: 'Browse Properties',
+      theme: 'blue'
+    }
+  }
+
+  const currentPersona = personas[activeTab]
+
+  return (
+    <section id="ecosystem" className="section-padding relative overflow-hidden">
+      {/* Dynamic Background */}
+      <motion.div
+        key={activeTab}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.03 }}
+        transition={{ duration: 0.5 }}
+        className={`absolute inset-0 ${currentPersona.bgColor}`}
+      />
+
+      <div className="container-custom relative z-10">
+        {/* Tab Switcher */}
+        <div className="flex justify-center mb-16">
+          <div className="inline-flex bg-gray-100 rounded-full p-1.5 gap-1">
+            {[
+              { key: 'owners' as Persona, label: 'Asset Owners' },
+              { key: 'agents' as Persona, label: 'Sales Agents' },
+              { key: 'investors' as Persona, label: 'Investors' }
+            ].map((tab) => (
+              <button
+                key={tab.key}
+                onClick={() => setActiveTab(tab.key)}
+                className={`relative px-8 py-3 rounded-full font-semibold transition-colors font-secondary ${
+                  activeTab === tab.key
+                    ? 'text-white'
+                    : 'text-brand-gray hover:text-brand-dark'
+                }`}
+              >
+                {activeTab === tab.key && (
+                  <motion.div
+                    layoutId="activeTab"
+                    className={`absolute inset-0 ${currentPersona.bgColor} rounded-full`}
+                    transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
+                  />
+                )}
+                <span className="relative z-10">{tab.label}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Content */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.5 }}
+            className="grid lg:grid-cols-2 gap-12 items-center"
+          >
+            {/* Left: Content */}
+            <div className="space-y-8">
+              <div>
+                <h2 className="text-4xl md:text-5xl font-bold text-brand-dark mb-4 font-primary">
+                  {currentPersona.headline}
+                </h2>
+                <p className="text-lg text-brand-gray leading-relaxed font-secondary">
+                  {currentPersona.description}
+                </p>
+              </div>
+
+              {/* Features */}
+              <div className="space-y-3">
+                {currentPersona.features.map((feature, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.1 }}
+                    className="flex items-start gap-3"
+                  >
+                    <div className={`w-6 h-6 rounded-full ${currentPersona.bgColor} flex items-center justify-center flex-shrink-0 mt-0.5`}>
+                      <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <span className="text-brand-dark font-secondary">{feature}</span>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* CTA */}
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className={`px-8 py-4 ${currentPersona.bgColor} text-white font-bold rounded-lg shadow-lg hover:shadow-xl transition-all font-secondary`}
+              >
+                {currentPersona.cta}
+              </motion.button>
+            </div>
+
+            {/* Right: Stats Visual */}
+            <div className="card-modern p-8 bg-white">
+              <div className="grid grid-cols-3 gap-6">
+                {currentPersona.stats.map((stat, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: i * 0.15 }}
+                    className="text-center"
+                  >
+                    <div className={`text-3xl font-bold mb-2 font-primary`} style={{ color: currentPersona.color }}>
+                      {stat.value}
+                    </div>
+                    <div className="text-xs text-brand-gray font-secondary">{stat.label}</div>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Animation placeholder */}
+              <div className="mt-8 p-6 bg-gray-50 rounded-lg">
+                <div className="h-32 flex items-center justify-center text-brand-gray font-secondary">
+                  {activeTab === 'owners' && '📊 Growth Chart'}
+                  {activeTab === 'agents' && '📱 Mobile Dashboard'}
+                  {activeTab === 'investors' && '🗺️ Property Map'}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+    </section>
+  )
+}

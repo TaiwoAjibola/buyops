@@ -67,7 +67,7 @@ export default function Navigation() {
               whileTap={{ scale: 0.98 }}
               className="px-6 py-2.5 bg-brand-blue text-white rounded-lg hover:bg-blue-700 transition-colors font-secondary font-semibold"
             >
-              Join Waitlist
+              Secure Early Access
             </motion.a>
           </div>
         </div>

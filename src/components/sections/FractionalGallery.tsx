@@ -96,14 +96,18 @@ function PropertyCard({ name, location, price, roi, risk, status, isHotDeal, fra
             className="overflow-hidden"
           >
             <div className="p-4 bg-gray-50 rounded-lg space-y-3">
-              <div className="grid grid-cols-3 gap-4 text-center">
+              <div className="grid grid-cols-2 gap-4 text-center">
                 <div>
                   <div className="text-sm text-brand-gray mb-1">Expected ROI</div>
                   <div className="text-lg font-bold text-green-600">{roi}</div>
                 </div>
                 <div>
-                  <div className="text-sm text-brand-gray mb-1">Risk Level</div>
+                  <div className="text-sm text-brand-gray mb-1">Risk Profile</div>
                   <div className={`text-lg font-bold ${riskColor}`}>{risk}</div>
+                </div>
+                <div>
+                  <div className="text-sm text-brand-gray mb-1">Development Stage</div>
+                  <div className="text-lg font-bold text-brand-dark">{status ?? '—'}</div>
                 </div>
                 <div>
                   <div className="text-sm text-brand-gray mb-1">Available</div>
@@ -168,11 +172,14 @@ export default function FractionalGallery() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
+          <div className="text-xs uppercase tracking-widest text-brand-gray font-secondary mb-3">
+            The Value Showcase
+          </div>
           <h2 className="text-4xl md:text-5xl font-bold text-brand-dark mb-4 font-primary">
-            Active Inventory
+            The Alpha Collection.
           </h2>
           <p className="text-xl text-brand-gray max-w-2xl mx-auto font-secondary">
-            Premium real estate opportunities, one fraction at a time
+            Actively managed, legally verified, and ready for acquisition.
           </p>
         </motion.div>
       </div>

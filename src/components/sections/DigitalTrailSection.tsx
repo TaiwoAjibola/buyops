@@ -7,29 +7,29 @@ const steps = [
   {
     number: 1,
     title: 'Deploy',
-    description: 'Admin creates a secure asset entry with verified legal documentation and financial structures.',
+    description: 'Every asset is stress-tested. We verify titles and legal standing so you don’t have to.',
     details: [
       'Legal title verification',
-      'Property valuation report',
+      'Legal standing & encumbrance checks',
       'Compliance certificates',
-      'Fractional structure defined'
+      'Institutional-grade listing pack'
     ]
   },
   {
     number: 2,
     title: 'Engage',
-    description: 'Sales agents manage leads through a 4-tab system, ensuring no lead falls through the cracks.',
+    description: 'Our Sales agents use the Velocity Layer to match the right property with the right investor.',
     details: [
-      'Personal leads tracking',
-      'Assigned lead management',
-      'Freelancer coordination',
-      'Real-time pipeline visibility'
+      'Precision lead matching',
+      'Automated follow-ups',
+      'Pipeline visibility across teams',
+      'Zero lead leakage'
     ]
   },
   {
     number: 3,
     title: 'Transact',
-    description: 'The "Ready to Buy" workflow triggers a secure gateway handoff. No agent ever touches cash.',
+    description: 'Security is non-negotiable. Payments are encrypted and routed directly—no middleman, no cash handling.',
     details: [
       'One-click payment links',
       'Bank-grade encryption',
@@ -40,7 +40,7 @@ const steps = [
   {
     number: 4,
     title: 'Verify',
-    description: 'Upon payment, the system auto-generates a unique Registration Code (PR-HRL-####) and issues the Digital Deed.',
+    description: 'Immediate legal finality. Your unique Registration Code is generated instantly, linking your identity to the asset forever.',
     details: [
       'Unique PR-HRL-#### format',
       'Blockchain-backed verification',
@@ -71,7 +71,7 @@ export default function DigitalTrailSection() {
             The Digital Trail
           </h2>
           <p className="text-xl text-brand-gray max-w-2xl mx-auto">
-            Every transaction, fully transparent and secure from start to finish
+            The journey of a naira—tracked end-to-end with zero friction and total transparency
           </p>
         </motion.div>
 

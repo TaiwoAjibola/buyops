@@ -87,7 +87,7 @@ export default function WaitlistForm() {
             You're on the list!
           </span>
         ) : (
-          'Join the Waitlist'
+          'Join the High-Value Waitlist.'
         )}
       </motion.button>
 

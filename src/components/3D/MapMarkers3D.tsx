@@ -60,11 +60,10 @@ function Markers() {
 
   return (
     <>
-      <Marker3D position={[-x, 0, z]} color="brand-green" label="✓ Verified Assets" />
-      <Marker3D position={[x, 0, z * 0.6]} color="brand-blue" label="From ₦850K" />
-      <Marker3D position={[-x * 0.75, 0, -z]} color="brand-indigo" label="18% Avg ROI" />
-      <Marker3D position={[x * 0.7, 0, -z * 0.75]} color="brand-dark" label="500+ Properties" />
-      <Marker3D position={[x * 0.95, 0, 0]} color="brand-green" label="10K+ Investors" />
+      <Marker3D position={[-x, 0, z]} color="brand-green" label="✓ Asset-Backed Security" />
+      <Marker3D position={[x, 0, z * 0.6]} color="brand-blue" label="Entry from ₦850K" />
+      <Marker3D position={[-x * 0.75, 0, -z]} color="brand-indigo" label="18% Target Yield" />
+      <Marker3D position={[x * 0.7, 0, -z * 0.75]} color="brand-dark" label="Institutional Grade Compliance" />
     </>
   )
 }

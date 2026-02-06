@@ -12,61 +12,58 @@ export default function PersonaSwitcher() {
     owners: {
       color: '#4338CA',
       bgColor: 'bg-indigo-600',
-      headline: 'Monetize your Land & Property.',
-      description: 'Transform your real estate assets into income-generating fractions. BuyOps Admin gives you total control over asset lifecycle, investor management, and revenue distribution.',
+      tag: 'The Monetization Engine',
+      headline: 'Turn Dead Capital into Liquid Cash.',
+      description: 'Stop waiting years for a sale. BuyOps Admin allows you to fractionalize your land or projects, reaching thousands of investors instantly while you maintain structural control.',
       features: [
-        'Multi-step Asset Wizard (Land, Off-plan, Under Construction)',
-        'Automated Fraction Distribution System',
-        'Real-time Revenue Analytics',
-        'Investor Relations Dashboard',
-        'Legal Documentation Management'
+        'Rapid Fractionalization: Go from title deed to listed asset in 48 hours.',
+        'Automated Liquidity: Revenue distribution handled by system logic.',
+        'The Command Center: Full-stack oversight of every naira and every unit.'
       ],
       stats: [
-        { label: 'Total Assets Listed', value: '156' },
-        { label: 'Average ROI Delivered', value: '18%' },
-        { label: 'Revenue Generated', value: '₦847M' }
+        { label: 'Assets Fractionalized', value: '156' },
+        { label: 'Time to List', value: '48hrs' },
+        { label: 'Revenue Routed', value: '₦847M' }
       ],
-      cta: 'List Your Property',
+      cta: 'Fractionalize an Asset',
       theme: 'indigo'
     },
     agents: {
       color: '#10B981',
       bgColor: 'bg-green-600',
-      headline: 'Sell Faster, Earn Sooner.',
-      description: 'Empower your sales pipeline with zero-friction lead management. Close deals without cash handling and earn commissions instantly through our velocity layer.',
+      tag: 'The High-Velocity Closer',
+      headline: 'Close Deals While You Sleep.',
+      description: 'Eliminate the cash-handling headache. Use a professional, bank-grade pipeline to manage leads, automate follow-ups, and get your commissions cleared the moment the link is clicked.',
       features: [
-        '4-Tab Lead Pipeline (Personal, Assigned, Freelancer, Archive)',
-        'Instant Commission Calculator (Lead Finder vs. Deal Closer)',
-        'One-Click Payment Link Generation',
-        'Real-time Lead Status Tracking',
-        'Automated Follow-up System'
+        'The 4-Tab Alpha: Never lose a lead; track Personal, Assigned, and Freelancer-sourced deals.',
+        'Commission Transparency: Real-time visibility into Lead Finder and Deal Closer earnings.',
+        'Frictionless Closing: Send secure payment links that convert 3x faster than traditional bank transfers.'
       ],
       stats: [
         { label: 'Active Leads', value: '127' },
         { label: 'Deals Closed This Month', value: '43' },
-        { label: 'Commission Earned', value: '₦12.4M' }
+        { label: 'Commission Cleared', value: '₦12.4M' }
       ],
-      cta: 'Start Selling',
+      cta: 'Activate the Velocity Layer',
       theme: 'green'
     },
     investors: {
       color: '#2563EB',
       bgColor: 'bg-blue-600',
-      headline: 'Buy the Future, One Piece at a Time.',
-      description: 'Access premium real estate fractions with complete transparency. Track your portfolio in real-time and access 7-section asset intelligence from anywhere.',
+      tag: 'The Wealth Accumulator',
+      headline: 'Own the Best of Lagos & Abuja, One Fraction at a Time.',
+      description: 'Bypass the multi-million naira barrier. Access institutional-grade real estate with as little as ₦850k. Your ownership is protected by a unique digital code and an immutable legal trail.',
       features: [
-        'Fractional Ownership Model (Not Percentages)',
-        '7-Section Deep-Dive Asset Intelligence',
-        'Real-time Portfolio Valuation',
-        'Automated Digital Certificates (PR-HRL-####)',
-        'Dividend Tracking & Payouts'
+        'Fractional vs. Percentage: Own a specific, tangible piece of the asset.',
+        '7-Layer Due Diligence: We show you the ROI, the Risk, and the Paperwork upfront.',
+        'The PR-HRL Protocol: Instant ownership via unique registration codes.'
       ],
       stats: [
         { label: 'Properties Available', value: '500+' },
-        { label: 'Average Entry Point', value: '₦850K' },
-        { label: 'Total Investors', value: '10,000+' }
+        { label: 'Entry Point', value: '₦850K' },
+        { label: 'Active Users', value: '10,000+' }
       ],
-      cta: 'Browse Properties',
+      cta: 'Secure a Fraction',
       theme: 'blue'
     }
   }
@@ -128,6 +125,9 @@ export default function PersonaSwitcher() {
             {/* Left: Content */}
             <div className="space-y-8">
               <div>
+                <div className="text-xs uppercase tracking-widest text-brand-gray font-secondary mb-3">
+                  {currentPersona.tag}
+                </div>
                 <h2 className="text-4xl md:text-5xl font-bold text-brand-dark mb-4 font-primary">
                   {currentPersona.headline}
                 </h2>

@@ -45,11 +45,11 @@ export default function CTAFooter() {
             className="text-center mb-24 py-20 px-8 card-modern bg-gradient-to-br from-brand-blue to-blue-700"
           >
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 font-primary">
-              Ready to build your fractional portfolio?
+              Don't just watch the market. Own it.
             </h2>
 
             <p className="text-xl text-white/90 mb-10 max-w-2xl mx-auto font-secondary">
-              Join the 1,000+ agents and investors already scaling on the BuyOps infrastructure.
+              Join 10,000+ users building the future of Nigerian real estate. Early waitlist members get first-look access to the "Emerald Garden" release.
             </p>
 
             <div className="max-w-md mx-auto">

@@ -6,19 +6,19 @@ export default function TrustSection() {
   const features = [
     {
       title: 'Native Currency',
-      description: 'Everything is priced and settled in Nigerian Naira (₦).'
+      description: 'Built by Nigerians, for Nigeria. No FX headaches.'
     },
     {
       title: 'Zero-Cash Policy',
-      description: '100% digital payment trails for maximum security and transparency.'
+      description: 'We’ve removed the human element from the payment trail to ensure 100% fund safety.'
     },
     {
       title: 'Role-Based Access',
       description: 'Distinct dashboards for Team Leads, Agents, and Admins.'
     },
     {
-      title: 'Data-Driven',
-      description: '7-section asset analysis covering ROI, Risk, and Legal status.'
+      title: 'The 7-Section Standard',
+      description: 'More data per asset than any traditional agency—from soil tests to legal deeds.'
     }
   ]
 

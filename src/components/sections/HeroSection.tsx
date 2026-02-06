@@ -65,17 +65,21 @@ export default function HeroSection() {
             className="space-y-8"
           >
             {/* Headline */}
+            <div className="text-xs uppercase tracking-widest text-brand-gray font-secondary">
+              One digital trail · Zero friction · Total transparency
+            </div>
+
             <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold leading-[0.95] tracking-tight font-primary">
               <span className="text-brand-dark">Real Estate Wealth,</span>
               <br />
               <span className="bg-gradient-to-r from-brand-blue via-brand-indigo to-brand-green bg-clip-text text-transparent">
-                Unlocked.
+                Unbound.
               </span>
             </h1>
             
             {/* Subheadline */}
             <p className="text-xl md:text-2xl text-brand-gray leading-relaxed max-w-3xl mx-auto font-secondary">
-              Nigeria's premier ecosystem connecting asset owners, agents, and investors.
+              The high-performance ecosystem for Nigeria’s land owners, elite agents, and visionary investors.
             </p>
 
             {/* Primary CTA */}
@@ -97,7 +101,7 @@ export default function HeroSection() {
               }}
               className="inline-block px-10 py-5 card-glass text-brand-blue font-bold text-lg rounded-xl font-secondary hover:bg-brand-blue/10 transition-colors"
             >
-              Join the Waitlist
+              Secure Early Access
             </motion.a>
           </motion.div>
         </div>

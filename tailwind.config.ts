@@ -14,11 +14,18 @@ const config: Config = {
       },
       colors: {
         'brand-dark': '#0F172A',
+        'brand-navy': '#0B1220',
         'brand-blue': '#2563EB',
+        'brand-blue-dark': '#1D4ED8',
+        'brand-teal': '#0D9488',
         'brand-green': '#10B981',
         'brand-indigo': '#4338CA',
         'brand-gray': '#64748B',
         'brand-light': '#F8FAFC',
+      },
+      boxShadow: {
+        soft: '0 10px 30px -12px rgba(15, 23, 42, 0.15)',
+        card: '0 4px 20px -8px rgba(15, 23, 42, 0.12)',
       },
       animation: {
         'fade-in': 'fade-in 0.6s ease-out',

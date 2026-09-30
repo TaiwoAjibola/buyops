@@ -1,131 +1,139 @@
-'use client'
+"use client";
 
-import { motion } from 'framer-motion'
-import { useState, useEffect } from 'react'
-import dynamic from 'next/dynamic'
-
-const GridBackground = dynamic(() => import('@/components/3D/GridBackground'), {
-  ssr: false,
-})
-
-const MapMarkers3D = dynamic(() => import('@/components/3D/MapMarkers3D'), {
-  ssr: false,
-})
+import { motion, useReducedMotion } from "framer-motion";
+import Image from "next/image";
+import { links } from "@/lib/links";
 
 export default function HeroSection() {
-  const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 })
+  const reduce = useReducedMotion();
 
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setCursorPos({ x: e.clientX, y: e.clientY })
-    }
-    window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [])
+  const container = {
+    hidden: {},
+    show: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
+  };
+  const item = {
+    hidden: { opacity: 0, y: reduce ? 0 : 18 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const },
+    },
+  };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white pt-20">
-      {/* 3D Grid Background with X, Y, Z perspective */}
-      <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 1 }}>
-        <GridBackground />
-      </div>
-
-      {/* 3D Map Markers with true depth */}
-      <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 2 }}>
-        <MapMarkers3D />
-      </div>
-
-      {/* Color Reveal Cursor */}
-      <motion.div
-        className="fixed w-[150px] h-[150px] rounded-full pointer-events-none hidden lg:block"
-        style={{
-          background: 'radial-gradient(circle, rgba(37, 99, 235, 0.3) 0%, transparent 70%)',
-          mixBlendMode: 'difference',
-          left: cursorPos.x - 75,
-          top: cursorPos.y - 75,
-          zIndex: 4,
-        }}
-        animate={{
-          scale: [1, 1.1, 1],
-        }}
-        transition={{
-          duration: 2,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
-      />
-
-      {/* Main Content Container */}
-      <div className="container-custom relative" style={{ zIndex: 10 }}>
-        <div className="max-w-5xl mx-auto text-center">
+    <section
+      id="top"
+      className="relative overflow-hidden bg-gradient-to-b from-slate-50 to-white scroll-anchor"
+    >
+      <div className="container-custom pt-28 md:pt-36 pb-16 md:pb-24">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-10 items-center">
+          {/* Copy */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="space-y-8"
+            variants={reduce ? undefined : container}
+            initial={reduce ? undefined : "hidden"}
+            animate={reduce ? undefined : "show"}
+            className="text-center lg:text-left"
           >
-            {/* Headline */}
-            <div className="text-xs uppercase tracking-widest text-brand-gray font-secondary">
-              One digital trail · Zero friction · Total transparency
-            </div>
-
-            <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold leading-[0.95] tracking-tight font-primary">
-              <span className="text-brand-dark">Real Estate Wealth,</span>
-              <br />
-              <span className="bg-gradient-to-r from-brand-blue via-brand-indigo to-brand-green bg-clip-text text-transparent">
-                Unbound.
-              </span>
-            </h1>
-            
-            {/* Subheadline */}
-            <p className="text-xl md:text-2xl text-brand-gray leading-relaxed max-w-3xl mx-auto font-secondary">
-              The high-performance ecosystem for Nigeria’s land owners, elite agents, and visionary investors.
-            </p>
-
-            {/* Primary CTA */}
-            <motion.a
-              href="#waitlist"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              animate={{
-                boxShadow: [
-                  '0 0 20px rgba(37, 99, 235, 0.3)',
-                  '0 0 40px rgba(37, 99, 235, 0.5)',
-                  '0 0 20px rgba(37, 99, 235, 0.3)',
-                ],
-                scale: [1, 1.02, 1],
-              }}
-              transition={{ 
-                boxShadow: { duration: 2, repeat: Infinity },
-                scale: { duration: 2, repeat: Infinity, ease: 'easeInOut' }
-              }}
-              className="inline-block px-10 py-5 card-glass text-brand-blue font-bold text-lg rounded-xl font-secondary hover:bg-brand-blue/10 transition-colors"
+            <motion.span
+              variants={reduce ? undefined : item}
+              className="inline-block text-xs font-semibold uppercase tracking-widest text-brand-teal"
             >
-              Secure Early Access
-            </motion.a>
+              Nigeria&apos;s asset sales network
+            </motion.span>
+
+            <motion.h1
+              variants={reduce ? undefined : item}
+              className="mt-4 text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.08] tracking-tight text-brand-dark"
+            >
+              Discover and sell real assets across Nigeria.
+            </motion.h1>
+
+            <motion.p
+              variants={reduce ? undefined : item}
+              className="mt-5 text-lg text-slate-600 max-w-xl mx-auto lg:mx-0"
+            >
+              BuyOps connects available buildings, properties, and approved
+              assets with prospective buyers through a nationwide network of
+              sales agents, freelancers, and cluster leads.
+            </motion.p>
+
+            <motion.div
+              variants={reduce ? undefined : item}
+              className="mt-8 flex flex-col sm:flex-row items-center lg:justify-start justify-center gap-3"
+            >
+              <a
+                href="#assets"
+                className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-brand-blue text-white font-semibold text-center hover:bg-brand-blue-dark transition-colors"
+              >
+                Explore Assets
+              </a>
+              <a
+                href="#sell"
+                className="w-full sm:w-auto px-6 py-3.5 rounded-xl border border-slate-300 text-slate-700 font-semibold text-center hover:border-brand-blue hover:text-brand-blue transition-colors"
+              >
+                Sell with BuyOps
+              </a>
+            </motion.div>
+
+            <motion.p
+              variants={reduce ? undefined : item}
+              className="mt-5 text-sm text-slate-500"
+            >
+              Already a member?{" "}
+              <a
+                href={links.signIn}
+                className="font-semibold text-brand-blue hover:underline"
+              >
+                Sign in
+              </a>
+            </motion.p>
+          </motion.div>
+
+          {/* Image */}
+          <motion.div
+            initial={reduce ? undefined : { opacity: 0, scale: 0.98 }}
+            animate={reduce ? undefined : { opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="relative"
+          >
+            <div className="relative rounded-3xl overflow-hidden shadow-soft bg-slate-200 aspect-[4/3]">
+              <Image
+                src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1200&q=70"
+                alt="A modern residential property available through the BuyOps sales network"
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
+              />
+            </div>
+            <div className="absolute -bottom-5 -left-5 hidden sm:flex items-center gap-3 rounded-2xl bg-white px-5 py-4 shadow-soft">
+              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-blue/10 text-brand-blue">
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                  />
+                </svg>
+              </span>
+              <div className="text-left">
+                <p className="text-sm font-semibold text-brand-dark">
+                  Verified assets
+                </p>
+                <p className="text-xs text-slate-500">
+                  Listed through BuyOps
+                </p>
+              </div>
+            </div>
           </motion.div>
         </div>
       </div>
-
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 1.5 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2"
-        style={{ zIndex: 10 }}
-      >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-          className="text-brand-gray text-sm font-secondary flex flex-col items-center gap-2"
-        >
-          <span>Scroll to explore</span>
-          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-          </svg>
-        </motion.div>
-      </motion.div>
     </section>
-  )
+  );
 }

@@ -17,23 +17,40 @@
   }
 }
 
-@layer utilities {
-  .card-modern {
-    @apply rounded-lg border border-gray-200 bg-white shadow-sm hover:shadow-md transition-shadow duration-300;
+@layer base {
+  html {
+    scroll-behavior: smooth;
   }
 
-  .card-glass {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+}
+
+@layer utilities {
+  .card-modern {
+    @apply rounded-2xl border border-gray-200 bg-white shadow-card hover:shadow-soft transition-shadow duration-300;
   }
 
   .section-padding {
-    @apply py-24 md:py-32;
+    @apply py-20 md:py-28;
   }
 
   .container-custom {
     @apply max-w-7xl mx-auto px-6 md:px-12;
+  }
+
+  /* Offset for the fixed header when jumping to in-page anchors. */
+  .scroll-anchor {
+    scroll-margin-top: 6rem;
   }
 }

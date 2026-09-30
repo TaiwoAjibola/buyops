@@ -1,128 +1,125 @@
-'use client'
+"use client";
 
-import { motion } from 'framer-motion'
-import { useState } from 'react'
+import { useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import Reveal from "@/components/Reveal";
 
-interface FAQItemProps {
-  question: string
-  answer: string
-  index: number
-}
+const faqs = [
+  {
+    q: "What is BuyOps?",
+    a: "BuyOps is a platform for selling buildings, properties, and other approved assets through a network of sales agents, freelancers, and cluster leads. The public site helps you explore assets and understand the sales opportunity.",
+  },
+  {
+    q: "What kinds of assets can I explore?",
+    a: "BuyOps works with approved buildings, properties, and other qualifying assets. Available listings and approved pricing are shared through the BuyOps sales application.",
+  },
+  {
+    q: "How can I enquire about an asset?",
+    a: "You can explore featured assets on this site and use the View Asset link to reach the sales application, where you can register and submit an enquiry.",
+  },
+  {
+    q: "Who can join the BuyOps sales network?",
+    a: "Sales agents, freelancers, and cluster or team leads can all join, subject to the applicable BuyOps onboarding and approval process.",
+  },
+  {
+    q: "What is the difference between an agent and a freelancer?",
+    a: "Agents participate in asset sales and manage prospective buyers directly. Freelancers can take part in sales through the applicable BuyOps arrangements. Exact responsibilities follow the platform's approved role definitions.",
+  },
+  {
+    q: "How do clusters and team leads work?",
+    a: "Cluster leads coordinate their assigned groups of sellers. Under the applicable rules, they may qualify for leadership bonuses based on the performance of their cluster.",
+  },
+  {
+    q: "How are sales commissions determined?",
+    a: "Commission arrangements depend on the asset and the applicable sales terms. Specific commission details are provided through the authenticated sales application and authorised channels.",
+  },
+  {
+    q: "How do existing members sign in?",
+    a: "Existing agents, freelancers, and cluster leads sign in to the BuyOps sales application using their registered account credentials.",
+  },
+];
 
-function FAQItem({ question, answer, index }: FAQItemProps) {
-  const [isOpen, setIsOpen] = useState(false)
-
+function FaqItem({
+  q,
+  a,
+  open,
+  onToggle,
+}: {
+  q: string;
+  a: string;
+  open: boolean;
+  onToggle: () => void;
+}) {
+  const reduce = useReducedMotion();
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="card-modern overflow-hidden"
-    >
+    <div className="border-b border-gray-100">
       <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
+        type="button"
+        onClick={onToggle}
+        aria-expanded={open}
+        className="flex w-full items-center justify-between gap-4 py-5 text-left"
       >
-        <span className="text-lg font-semibold text-brand-dark font-primary pr-4">
-          {question}
-        </span>
-        <motion.span
-          animate={{ rotate: isOpen ? 180 : 0 }}
-          transition={{ duration: 0.3 }}
-          className="text-2xl text-brand-blue flex-shrink-0"
+        <span className="font-medium text-brand-dark">{q}</span>
+        <svg
+          className={`w-5 h-5 shrink-0 text-slate-400 transition-transform duration-300 ${
+            open ? "rotate-180" : ""
+          }`}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
         >
-          ↓
-        </motion.span>
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M19 9l-7 7-7-7"
+          />
+        </svg>
       </button>
-      
-      <motion.div
-        initial={false}
-        animate={{
-          height: isOpen ? 'auto' : 0,
-          opacity: isOpen ? 1 : 0
-        }}
-        transition={{ duration: 0.3 }}
-        className="overflow-hidden"
-      >
-        <div className="px-6 pb-5 text-brand-gray font-secondary leading-relaxed">
-          {answer}
-        </div>
-      </motion.div>
-    </motion.div>
-  )
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            initial={reduce ? { opacity: 0 } : { opacity: 0, height: 0 }}
+            animate={reduce ? { opacity: 1 } : { opacity: 1, height: "auto" }}
+            exit={reduce ? { opacity: 0 } : { opacity: 0, height: 0 }}
+            transition={{ duration: 0.25 }}
+            className="overflow-hidden"
+          >
+            <p className="pb-5 text-slate-600 leading-relaxed">{a}</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
 }
 
 export default function FAQSection() {
-  const faqs = [
-    {
-      question: 'Is this a “Contribution” scheme?',
-      answer: 'No. This is Direct Ownership. You are buying a legal fraction of a physical asset, documented with a PR-HRL Registration Code.'
-    },
-    {
-      question: 'Why Naira (₦)?',
-      answer: 'To protect our ecosystem from currency volatility and ensure that Nigerian real estate remains accessible to the people driving our economy.'
-    },
-    {
-      question: 'How does the PR-HRL code protect me?',
-      answer: 'Every purchase generates a unique Registration Code (PR-HRL-####) tied to your identity and the specific asset fraction. It acts as a verifiable ownership reference across the BuyOps digital trail.'
-    },
-    {
-      question: 'How do payments work (and why “zero-cash”)?',
-      answer: 'Security is non-negotiable. Payments are encrypted and routed directly through secure payment links—no middleman, no cash handling. Your confirmation is recorded instantly.'
-    },
-    {
-      question: 'What happens after I purchase a fraction?',
-      answer: 'Upon successful payment, the system issues your PR-HRL Registration Code and a Digital Deed. You get immediate access to the asset’s due diligence pack, projected returns, and portfolio tracking.'
-    },
-    {
-      question: 'What fees are involved?',
-      answer: 'We believe in transparency. All fees are clearly displayed before purchase, including platform fees, transaction fees, and any property management costs. There are no hidden charges. Everything is priced and settled in Nigerian Naira (₦).'
-    }
-  ]
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="section-padding bg-gray-50">
+    <section id="faq" className="scroll-anchor section-padding bg-white">
       <div className="container-custom">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold text-brand-dark mb-4 font-primary">
-            Frequently Asked Questions
-          </h2>
-          <p className="text-xl text-brand-gray max-w-2xl mx-auto font-secondary">
-            Everything you need to know about fractional real estate investment
+        <Reveal className="max-w-2xl">
+          <p className="text-sm font-semibold uppercase tracking-widest text-brand-teal">
+            FAQ
           </p>
-        </motion.div>
+          <h2 className="mt-3 text-3xl md:text-4xl font-bold tracking-tight text-brand-dark">
+            Frequently asked questions
+          </h2>
+        </Reveal>
 
-        <div className="max-w-3xl mx-auto space-y-4">
-          {faqs.map((faq, index) => (
-            <FAQItem
-              key={index}
-              question={faq.question}
-              answer={faq.answer}
-              index={index}
+        <Reveal className="mt-10 max-w-3xl">
+          {faqs.map((faq, i) => (
+            <FaqItem
+              key={faq.q}
+              q={faq.q}
+              a={faq.a}
+              open={openIndex === i}
+              onToggle={() => setOpenIndex(openIndex === i ? null : i)}
             />
           ))}
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          className="text-center mt-12"
-        >
-          <p className="text-brand-gray mb-4 font-secondary">Still have questions?</p>
-          <button className="px-8 py-3 border-2 border-brand-blue text-brand-blue font-semibold rounded-lg hover:bg-brand-blue hover:text-white transition-all font-secondary">
-            Contact Support
-          </button>
-        </motion.div>
+        </Reveal>
       </div>
     </section>
-  )
+  );
 }

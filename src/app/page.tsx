@@ -1,21 +1,23 @@
-import HeroSection from '@/components/sections/HeroSection'
-import PersonaSwitcher from '@/components/sections/PersonaSwitcher'
-import FractionalGallery from '@/components/sections/FractionalGallery'
-import DigitalTrailSection from '@/components/sections/DigitalTrailSection'
-import TrustSection from '@/components/sections/TrustSection'
-import FAQSection from '@/components/sections/FAQSection'
-import CTAFooter from '@/components/sections/CTAFooter'
+import HeroSection from "@/components/sections/HeroSection";
+import FeaturedAssets from "@/components/sections/FeaturedAssets";
+import HowItWorks from "@/components/sections/HowItWorks";
+import SellWithBuyOps from "@/components/sections/SellWithBuyOps";
+import WhyBuyOps from "@/components/sections/WhyBuyOps";
+import FAQSection from "@/components/sections/FAQSection";
+import FinalCTA from "@/components/sections/FinalCTA";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-white">
       <HeroSection />
-      <PersonaSwitcher />
-      <FractionalGallery />
-      <DigitalTrailSection />
-      <TrustSection />
+      <FeaturedAssets />
+      <HowItWorks />
+      <SellWithBuyOps />
+      <WhyBuyOps />
       <FAQSection />
-      <CTAFooter />
+      <FinalCTA />
+      <Footer />
     </main>
-  )
+  );
 }
